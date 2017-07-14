@@ -3,34 +3,36 @@
 angular.module('peopleList').
     component('peopleList', {
         templateUrl: 'people-list/people-list.template.html',
-        controller: ['PeopleService',
-            function PeopleListController(PeopleService) {
-                var self = this;
+        controller: ['PeopleService', '$filter',
+            function PeopleListController(PeopleService, $filter) {
+                var ctrl = this;
                 PeopleService.list().then(peopleListSuccess).catch(peopleListFailure);
-                self.orderProp = 'name';
-                self.editingPerson;
-                self.people;
-                self.errorMessage;
+                ctrl.orderProp = 'name';
+                ctrl.editingPerson;
+                ctrl.people;
+                ctrl.errorMessage;
+                ctrl.filteredPeople = [];
 
                 //$http callback on success
                 function peopleListSuccess(result) {
-                    self.people = result.data;
+                    ctrl.people = result.data;
+                    ctrl.filteredPeople = ctrl.people;
                 }
 
                 //$http callback on failure
                 function peopleListFailure(result) {
-                    self.errorMessage = result.status + "\n" + result.statusText;
+                    ctrl.errorMessage = result.status + "\n" + result.statusText;
                 }
 
                 // Show the edit form
-                self.editPerson = function (person, $event) {
+                ctrl.editPerson = function (person, $event) {
                     $event.preventDefault();
-                    self.editingPerson = person;
-                    self.originalPerson = angular.extend({}, person);
+                    ctrl.editingPerson = person;
+                    ctrl.originalPerson = angular.extend({}, person);
                 }
 
                 // Update Person record
-                self.savePerson = function (person) {
+                ctrl.savePerson = function (person) {
 
                     PeopleService.save(person);
                     _closeEditForm();
@@ -38,23 +40,29 @@ angular.module('peopleList').
                 }
 
                 // Delete Person record
-                self.deletePerson = function (person) {
+                ctrl.deletePerson = function (person) {
                     PeopleService.delete(person).then(function() {
-                        self.people.splice(self.people.indexOf(person),1);
+                        ctrl.people.splice(ctrl.people.indexOf(person),1);
                     })
                     _closeEditForm();
                 }
 
                 // Revert changes function
-                self.revertPerson = function (person) {
-                    self.people[self.people.indexOf(person)] = self.originalPerson;
+                ctrl.revertPerson = function (person) {
+                    ctrl.people[ctrl.people.indexOf(person)] = ctrl.originalPerson;
                     _closeEditForm();               
                 }
 
                 function _closeEditForm() {
-                    self.editingPerson = null;
-                    self.originalPerson = null
+                    ctrl.editingPerson = null;
+                    ctrl.originalPerson = null
                 }
+
+                ctrl.applySearchFilter = function(){
+                   ctrl.filteredPeople = $filter('filter')(ctrl.people, ctrl.query);
+                   ctrl.filteredPeople = $filter('orderBy')(ctrl.filteredPeople, ctrl.orderProp);
+                }
+
 
             }
         ]

@@ -14,7 +14,7 @@
                 </select>
                 </p>
                 <p style="text-align:center;">
-                    <button class="btn btn-default">Apply</button>
+                    <button class="btn btn-default" ng-click="$ctrl.applySearchFilter()">Apply</button>
                 </p>
                 <p>Total People: {{$ctrl.people.length}}</p>
             </div>
@@ -22,7 +22,7 @@
         <div class="col-md-7">
             <div ng-if="$ctrl.errorMessage" class="alert alert-warning">Error Encountered: {{$ctrl.errorMessage}}</div>
             <table class="table table-hover">
-                <tr ng-repeat="person in $ctrl.people">
+                <tr ng-repeat="person in $ctrl.filteredPeople">
                     <td><img ng-src="{{person.avatar}}" alt="{{person.name}}" /></td>
                     <td>
                         <h4>{{person.name}}</h4>
