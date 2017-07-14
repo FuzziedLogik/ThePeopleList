@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="peopleApp">
+    <head>
+        <meta charset="utf-8">
+        <title>ThePeopleList</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="app.css" />
+
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="app.module.js"></script>
+        <script src="app.config.js"></script>
+        <script src="core/core.module.js"></script>
+        <script src="core/people/people.module.js"></script>
+        <script src="core/people/people.service.js"></script>
+        <script src="people-list/people-list.module.js"></script>
+        <script src="people-list/people-list.component.js"></script>
+        <script src="people-form/people-form.module.js"></script>
+        <script src="people-form/people-form.component.js"></script>
+        <script src="people-new/people-new.module.js"></script>
+        <script src="people-new/people-new.component.js"></script>
+
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">ThePeopleList</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#!/">The List</a></li>
+                    <li><a href="#!/people/add">Add People</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="view-container">
+            <div ng-view class="view-frame"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form ng-submit="$ctrl.save()">
+                <div class="form-group">
+                    <label class="control-label" for="personName">Name</label>
+                    <input ng-model="$ctrl.person.name" class="form-control" type="text" id="personName" name="name" placeholder="enter name"
+                        autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="personEmail">Email</label>
+                    <input ng-model="$ctrl.person.email" class="form-control" type="text" id="personEmail" name="email" placeholder="enter email"
+                        autofocus>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="personAvatar">Avatar (Url)</label>
+                    <input ng-model="$ctrl.person.avatar" class="form-control" type="text" id="personAvatar" name="avatar" placeholder="enter url for avatar"
+                        autofocus>
+                </div>
+                <div style="text-align:center;">
+                    <button class="btn btn-link" ng-click="$ctrl.saveClicked()" name="updatebttn">Save</button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-link" ng-click="$ctrl.cancelClicked()" name="cancelbttn">Cancel</button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-link" ng-click="$ctrl.deleteClicked()" name="deletebttn">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
